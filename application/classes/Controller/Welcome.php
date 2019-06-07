@@ -1,35 +1,20 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Welcome extends Controller {
-
+class Controller_Welcome extends Controller_Template {
+    public $template = 'main';
 	public function action_index()
 	{
-//	    $data = [
-//	        'name' => 'Васька',
-//            'age' => 25
-//        ];
-//	    $this->response->body(View::factory('welcome', $data));
+        $content = View::factory('welcome');
 
-//        $view = View::factory('welcome');
-//        $view->name = 'Васька';
-//        $view->age = '25';
+        // Передаем данные в шаблон welcome.php
+        $content->age = 'больше 18';
+        $content->name = 'Васька';
 
-//        $view = View::factory('welcome')
-//            ->set('name', 'Васька')
-//            ->set('age', 25);
+        // Передаем данные в шаблон по умолчанию - main.php
+        $this->template->title = 'Работаем с Контроллером Шаблонов';
+        $this->template->description = 'Учимся передавать данные в шаблоны';
+        $this->template->content = $content;
 
-//        $view = View::factory('welcome')
-//            ->bind('name', $name)
-//            ->bind('age', $age);
-//
-//        $name = 'Васька';
-//        $age = 25;
-
-        $view = View::factory('welcome')
-            ->bind('age', $age);
-        $age = 'больше 18';
-        //$view->name = 'Васька';
-        $this->response->body($view);
 	}
 
 	public function action_test()
